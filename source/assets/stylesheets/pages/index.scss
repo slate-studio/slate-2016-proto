@@ -1,0 +1,24 @@
+.home-hero {
+  h1 {
+    margin: 3em 0;
+  }
+}
+.home-process {
+  padding: 10em 0;
+}
+.home-work {
+  .side-image {
+    margin-bottom: 4em;
+
+    &:nth-child(2n) {
+      img {
+        @include transform(translate(-50%, -50%));
+        left: 50%;
+      }
+
+      .copy {
+        left: 0;
+      }
+    }
+  }
+}
