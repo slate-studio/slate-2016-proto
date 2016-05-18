@@ -1,10 +1,19 @@
-// Nav
+// Transition
+.transition {
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+// Navigation
 header.navigation {
   $base-border-color: gainsboro !default;
   $base-border-radius: 3px !default;
   $action-color: #477DCA !default;
   $dark-gray: #333 !default;
-  $large-screen: em(860) !default;
+  $large-screen: 53.75em !default;
   $navigation-padding: 1em;
   $navigation-background: $dark-gray;
   $navigation-color: transparentize(white, 0.3);
@@ -28,7 +37,6 @@ header.navigation {
 
   .navigation-wrapper {
     @include clearfix;
-    @include outer-container;
     position: relative;
     z-index: 9999;
   }
@@ -75,7 +83,7 @@ header.navigation {
     z-index: 9999999;
 
     @include media ($horizontal-bar-mode) {
-      float: left;
+      float: right;
     }
   }
 
@@ -161,10 +169,10 @@ header.navigation {
       padding-right: 0.6em;
     }
 
-    > a:after {
+    > a::after {
       @include position(absolute, auto -0.4em auto auto);
-      content: '\25BE';
       color: $navigation-color;
+      content: "\25BE";
     }
   }
 
@@ -184,8 +192,8 @@ header.navigation {
         margin-right: $navigation-submenu-padding;
       }
 
-      &:after {
-        content: '›';
+      &::after {
+        content: "›";
         font-size: 1.2em;
         position: absolute;
         right: $navigation-submenu-padding / 2;
@@ -211,6 +219,20 @@ header.navigation {
       left: -$navigation-submenu-padding;
       position: absolute;
       top: 1.5em;
+    }
+
+    .submenu.fly-out-right {
+      @include media($horizontal-bar-mode) {
+        left: $navigation-submenu-width - 0.2em;
+        top: 0;
+      }
+    }
+
+    .submenu.fly-out-left {
+      @include media($horizontal-bar-mode) {
+        left: -$navigation-submenu-width + 0.2em;
+        top: 0;
+      }
     }
 
     .submenu {
@@ -285,10 +307,10 @@ header.navigation {
       position: relative;
 
       input[type=search] {
-        @include box-sizing(border-box);
         background: $navigation-search-background;
-        border-radius: $base-border-radius * 2;
         border: $navigation-search-border;
+        border-radius: $base-border-radius * 2;
+        box-sizing: border-box;
         color: $navigation-color;
         font-size: 0.9em;
         font-style: italic;
@@ -303,7 +325,7 @@ header.navigation {
 
       button[type=submit] {
         background: $navigation-search-background;
-        border: none;
+        border: 0;
         bottom: 0.3em;
         left: auto;
         outline: none;
@@ -326,41 +348,39 @@ header.navigation {
       width: 16em;
 
       input {
-        @include box-sizing(border-box);
+        box-sizing: border-box;
         display: block;
       }
     }
   }
 }
 
-
 // Type System
-.type-system-traditional {
+article.type-system-geometric {
   $base-border-radius: 3px !default;
   $base-line-height: 1.5em !default;
   $base-spacing: 1.5em !default;
   $action-color: #477DCA !default;
   $dark-gray: #333 !default;
   $light-gray: #DDD !default;
-  $medium-screen: em(640) !default;
+  $medium-screen: 40em !default;
   $base-font-color: $dark-gray !default;
-  $sans-serif: 'Noto Sans', sans-serif;
-  $serif: 'Radley', serif;
+  $sans-serif: 'Questrial', sans-serif;
+  $serif: 'Sanchez', serif;
 
   @include clearfix;
   font-family: $sans-serif;
   text-align: left;
-  
+
   h1, h2, h3, p {
-    color: $dark-gray;
     margin: 0;
   }
 
   hr {
     border-bottom: 1px solid $light-gray;
-    border-left: none;
-    border-right: none;
-    border-top: none;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
     margin: $base-spacing 0;
   }
 
@@ -375,22 +395,22 @@ header.navigation {
   }
 
   .type {
-    border-bottom: 2px solid;
+    border-bottom: 1px solid;
     display: inline-block;
     font-family: $sans-serif;
-    font-size: .7em;
+    font-size: 0.7em;
     font-weight: 800;
     margin-bottom: 2em;
-    padding: .1em 0;
+    padding: 0.3em 0;
     text-align: left;
     text-transform: uppercase;
   }
 
   h1 {
     font-family: $serif;
-    font-size: 1.9em;
+    font-size: 1.8em;
     font-weight: 700;
-    margin-bottom: 0.3em;
+    margin-bottom: 0.5em;
 
     @include media($medium-screen) {
       font-size: 2.6em;
@@ -399,13 +419,14 @@ header.navigation {
 
   h2 {
     font-family: $serif;
-    font-size: 1.3em;
+    font-size: 1.2em;
+    font-style: italic;
     font-weight: 400;
-    line-height: 1.25em;
-    margin-bottom: .9em;
+    line-height: 1.4em;
+    margin-bottom: 1.1em;
 
     @include media($medium-screen) {
-      font-size: 1.5em;
+      font-size: 1.3em;
     }
   }
 
@@ -413,20 +434,15 @@ header.navigation {
     background: #F7F7F7;
     border-radius: $base-border-radius * 1.5;
     border: 1px solid #E0E0E0;
-    font-size: 0.75em;
+    font-size: 0.7em;
     font-style: normal;
     padding: 0.1em 0.4em;
     white-space: nowrap;
   }
 
-  h2 code {
-    font-size: 0.65em;
-  }
-
   h3 {
     font-family: $serif;
     font-size: 1.4em;
-    font-style: italic;
     font-weight: 400;
     line-height: 1.3em;
     margin-bottom: 0.4em;
@@ -435,23 +451,18 @@ header.navigation {
   p.date {
     color: transparentize($base-font-color, 0.6);
     font-family: $serif;
+    font-size: 0.9em;
     font-style: italic;
-    margin-bottom: .3em;
+    margin-bottom: 0.3em;
   }
 
   p {
     font-family: $sans-serif;
-    letter-spacing: 1;
-    line-height: 1.55em;
+    font-size: 1.05em;
+    line-height: 1.5em;
     margin-bottom: 1.5em;
-
-    span {
-      font-family: $serif;
-      font-size: 1.2em;
-      font-style: italic;
-    }
   }
-  
+
   a.read-more {
     display: inline-block;
     font-family: $sans-serif;
@@ -476,12 +487,9 @@ header.navigation {
   }
 
   p.author {
-    font-family: $serif;
-    font-size: 1.2em;
-    font-style: italic;
+    font-family: $sans-serif;
   }
 }
-
 
 // Side Image
 .side-image {  
@@ -551,7 +559,6 @@ header.navigation {
   @include reset-display();
 }
 
-
 // Dynamic Height Image
 .image-gradient-dynamic {
   $image-gradient-color-top: red; 
@@ -584,6 +591,7 @@ header.navigation {
     position: absolute;
     text-align: center;
     top: 50%;
+    width: 80%;
     z-index: 999;
 
     p {
@@ -591,6 +599,36 @@ header.navigation {
       line-height: 1.5em;
       padding: 1em 2em;
       position: relative;
+    }
+  }
+  .bottom-copy {
+    bottom: 0;
+    margin: auto;
+    padding: 2em;
+    position: absolute;
+    width: 100%;
+    z-index: 999;
+
+    .logo-placeholder {
+      display: block;
+      height: 30px;
+      margin-bottom: 1em;
+      width: 80px;
+    }
+
+    h2 {
+      color: white;
+      font-size: 1.8em;
+      font-weight: 400;
+    }
+
+    p {
+      color: white;
+      position: relative;
+
+      &.tags {
+        padding-top: 1em;
+      }
     }
   }
 
@@ -606,6 +644,239 @@ header.navigation {
       @include position(absolute, 0px 0px 0px 0px);
       content: '';
       display: block;
+    }
+  }
+}
+
+// Primary Button
+a.button-primary {
+  background: $blue;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  padding: 1em 2em;
+  @extend .transition;
+
+  &:hover {
+    background: darken($blue, 4%);
+  }
+}
+
+// Secondary Button
+a.button-secondary {
+  background: $dark-gray;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  padding: 1em 2em;
+  @extend .transition;
+
+  &:hover {
+    background: lighten($dark-gray, 10%);
+  }
+}
+
+// Logo Placeholder
+.logo-placeholder {
+  background: #f5f5f5;
+  border: 2px solid #d1d7da;
+  height: 60px;
+  border-radius: 100%;
+}
+
+// Footer
+.footer-2 {
+  $base-spacing: 1.5em !default;
+  $action-color: #477DCA !default;
+  $medium-screen: 40em !default;
+  $large-screen: 53.75em !default;
+  $footer-background: desaturate(darken($action-color, 20%), 30%);
+  $footer-color: white;
+  $footer-link-color: transparentize($footer-color, 0.6);
+  $footer-disclaimer-color: transparentize($footer-color, 0.6);
+
+  background: $footer-background;
+  display: inline-block;
+  padding: $base-spacing;
+  width: 100%;
+
+  .footer-logo {
+    margin-bottom: 1em;
+    margin-right: 1em;
+
+    @include media($large-screen) {
+      float: left;
+      margin-bottom: 0;
+    }
+  }
+
+  .footer-logo img {
+    height: 1.6em;
+  }
+
+  ul {
+    line-height: 1.5em;
+    margin: 0 0 1em 0;
+    padding: 0;
+
+    @include media($large-screen) {
+      float: left;
+      line-height: 1.8em;
+      margin-bottom: 0;
+      margin-left: 1em;
+    }
+  }
+
+  ul li {
+    list-style: none;
+    padding-right: 1em;
+
+    @include media($large-screen) {
+      display: inline;
+      text-align: left;
+    }
+  }
+  ul li p {
+    color: $footer-link-color;
+  }
+  ul li a {
+    color: $footer-link-color;
+    text-decoration: none;
+
+    &:focus,
+    &:hover {
+      color: transparentize($footer-color, 0);
+    }
+  }
+
+  .footer-secondary-links {
+    @include media($large-screen) {
+      float: right;
+    }
+
+    li {
+      font-size: 0.8em;
+    }
+
+    ul.footer-social {
+      margin: 1em 0 0 0;
+
+      @include media($large-screen) {
+        float: right;
+        margin-top: 0;
+      }
+
+      li {
+        float: left;
+        font-size: 1em;
+        line-height: 0;
+        margin: 0;
+        padding-right: 0.7em;
+
+        &:last-child {
+          padding-right: 0;
+        }
+      }
+
+      img {
+        height: 1.6em;
+        opacity: 0.7;
+        padding: 1px;
+
+        &:focus,
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+// Cards
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0 -1em;
+}
+
+.card {
+  $base-border-color: gainsboro !default;
+  $base-border-radius: 3px !default;
+  $base-background-color: white !default;
+  $base-spacing: 1.5em !default;
+  $action-color: #477DCA !default;
+  $dark-gray: #333 !default;
+  $base-font-color: $dark-gray !default;
+  $card-border-color: $base-border-color;
+  $card-border: 1px solid $card-border-color;
+  $card-background: lighten($card-border-color, 10%);
+  $card-header-background: $card-background;
+  $card-margin: 1em;
+  $card-image-hover-opacity: 0.7;
+  $card-image-hover-color: #F8F2B4;
+
+  background-color: $card-background;
+  border: $card-border;
+  border-radius: $base-border-radius;
+  box-shadow: 0 2px 4px darken($base-background-color, 10%);
+  cursor: pointer;
+  flex-basis: 15em;
+  flex-grow: 1;
+  margin: 0 $card-margin $base-spacing $card-margin;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+
+  .card-image {
+    background-color: $card-image-hover-color;
+    height: 150px;
+    max-height: 150px;
+    overflow: hidden;
+
+    img {
+      @include border-top-radius($base-border-radius);
+      opacity: 1;
+      transition: all 0.2s ease-in-out;
+      width: 100%;
+    }
+  }
+
+  .card-header {
+    background-color: $card-header-background;
+    border-bottom: $card-border;
+    border-radius: $base-border-radius $base-border-radius 0 0;
+    font-weight: bold;
+    line-height: 1.5em;
+    padding: ($base-spacing / 3) ($base-spacing / 2);
+    transition: all 0.2s ease-in-out;
+  }
+
+  .card-copy {
+    font-size: 0.9em;
+    line-height: 1.5em;
+    padding: ($base-spacing / 2) ($base-spacing / 2);
+
+    p {
+      margin: 0 0 ($base-spacing / 2);
+    }
+  }
+
+  &:focus,
+  &:hover {
+    cursor: pointer;
+
+    img {
+      opacity: $card-image-hover-opacity;
+    }
+  }
+
+  &:active {
+    background-color: $card-background;
+
+    .card-header {
+      background-color: $card-background;
     }
   }
 }

@@ -1,0 +1,11 @@
+// Case Study
+.casestudy-hero {
+  .image-gradient-dynamic {
+    display: block;
+    margin-bottom: 2em;
+
+    > img {
+      height: 400px;
+    }
+  }
+}

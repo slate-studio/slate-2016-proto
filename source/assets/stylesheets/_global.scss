@@ -1,3 +1,4 @@
+// Page Container
 .container {
   @include outer-container;
   padding: 2em 1em;
@@ -5,4 +6,38 @@
   > article {
     @include span-columns(12);
   }
+}
+
+// Cursor Fix
+a {
+	cursor: pointer;
+}
+
+// Navigation
+header.navigation {
+	.container {
+		padding: 0;
+	}
+	a.logo {
+		max-width: 150px;
+	}
+}
+
+// Footer
+footer.footer-2 {
+	.container {
+		padding: 0;
+	}
+	.container > ul {
+		margin: 0;
+		line-height: 0;
+	}
+	p {
+		font-size: 0.8em;
+		line-height: 2.4em;
+		margin: 0;
+	}
+	ul.footer-social {
+		padding-left: 1em;
+	}
 }
