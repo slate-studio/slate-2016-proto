@@ -10,10 +10,11 @@
     = stylesheet_link_tag "application"
 
   %body{class: page_classes}
-    = partial 'layouts/_nav'
+    = partial '/layouts/_nav'
     .container.type-system-traditional
       = yield
-    = javascript_include_tag "https://code.jquery.com/jquery-2.1.1.min.js", "application"
+    = javascript_include_tag "https://code.jquery.com/jquery-2.1.1.min.js"
+    = javascript_include_tag "application"
 
     %footer.footer-2{:role => "contentinfo"}
       .container
