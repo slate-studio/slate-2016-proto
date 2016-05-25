@@ -1,0 +1,103 @@
+// Case Study
+.about-intro {
+	h1, h3 {
+		color: white;
+	}
+	h3 {
+		font-size: 0.6em;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+	}
+}
+.about-info {
+	@include outer-container;
+	padding: 4em 0;
+
+	h3 {
+		font-size: 0.6em;
+		letter-spacing: 0.1em;
+		color: $medium-gray;
+		text-transform: uppercase;
+	}
+
+	.about-summary {
+		@include span-columns(8);
+		@include shift(2);
+
+		&.location {
+			padding-bottom: 2em;
+		}
+	}
+}
+.about-photos {
+}
+
+.about-focus {
+  padding-top: 4em;
+
+  h2 {
+    padding-bottom: 1em;
+		text-align: center;
+  }
+	h3 {
+		font-size: 0.6em;
+		letter-spacing: 0.1em;
+		color: $medium-gray;
+	  text-align: center;
+		text-transform: uppercase;
+	}
+}
+
+.about-clients {
+  padding: 4em 0;
+
+  h2 {
+    padding-bottom: 1em;
+    text-align: center;
+  }
+
+  ul {
+    @include outer-container;
+
+    li {
+      @include span-columns(1.5);
+      margin-bottom: 2em;
+
+      &:nth-child(8n) {
+      	@include omega;
+      }
+    }
+  }
+}
+
+.about-leadership {
+  padding-top: 4em;
+  @include outer-container;
+
+  h2 {
+    padding-bottom: 1em;
+		@include span-columns(8);
+		@include shift(2);
+  }
+	h3 {
+		font-size: 0.6em;
+		letter-spacing: 0.1em;
+		color: $medium-gray;
+		text-transform: uppercase;
+		@include span-columns(8);
+		@include shift(2);
+	}
+	> p {
+		@include span-columns(8);
+		@include shift(2);
+	  padding-bottom: 1em;
+	}
+	.hide {
+		background: transparent;
+		border: none;
+		box-shadow: none;
+	}
+}
+#map_canvas {
+	padding-top: 2em;
+}

@@ -1,11 +1,101 @@
 // Case Study
+.casestudy-intro {
+	position: relative;
+
+	.logo-placeholder {
+		height: 40px;
+		margin-bottom: 1em;
+		max-width: 100px;
+	}
+  .static-copy {
+  	position: absolute;
+  	top: 0;
+  	bottom: 0;
+  	right: 0;
+  	left: 0;
+  }
+  .bottom-copy {
+    bottom: 0;
+    margin: auto;
+    padding: 2em;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    z-index: 999;
+
+    .logo-placeholder {
+      display: block;
+      height: 30px;
+      margin: 0 auto 1em;
+      width: 80px;
+    }
+
+    h2 {
+      color: white;
+      font-size: 1.8em;
+      font-weight: 400;
+    }
+
+    p {
+      color: white;
+      position: relative;
+
+      &.tags {
+        padding-top: 1em;
+      }
+    }
+  }
+}
 .casestudy-hero {
+
   .image-gradient-dynamic {
     display: block;
-    margin-bottom: 2em;
 
     > img {
-      height: 400px;
+      max-height: 400px;
     }
+  }
+}
+.casestudy-info {
+	@include outer-container;
+	padding: 4em 0;
+
+	h3 {
+		font-size: 0.6em;
+		letter-spacing: 0.1em;
+		color: $medium-gray;
+		text-transform: uppercase;
+	}
+
+	.casestudy-summary {
+		@include span-columns(8);
+		@include shift(2);
+	}
+	.casestudy-challenge {
+		@include span-columns(6);
+	}
+	.casestudy-role {
+		@include span-columns(6);
+	}
+}
+.casestudy-product {
+
+	img {
+		max-height: 400px;
+	}
+}
+
+.casestudy-stat {
+	img {
+		max-height: 400px;
+	}
+}
+
+.casestudy-latest {
+  padding-top: 4em;
+
+  h2 {
+    padding-bottom: 1em;
+    text-align: center;
   }
 }

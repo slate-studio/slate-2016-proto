@@ -1,0 +1,45 @@
+// Hero
+.contact-intro {
+	h1, h3 {
+		color: white;
+	}
+	h3 {
+		font-size: 0.6em;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+	}
+}
+.contact-info {
+	@include outer-container;
+	padding: 4em 0;
+
+	h3 {
+		font-size: 0.6em;
+		letter-spacing: 0.1em;
+		color: $medium-gray;
+		text-transform: uppercase;
+	}
+
+	.contact-summary {
+		@include span-columns(8);
+		@include shift(2);
+	}
+}
+.contact-methods {
+	@include outer-container;
+	padding-bottom: 4em;
+}
+.contact-photos {
+
+	img {
+		max-height: 400px;
+	}
+}
+#map_canvas {
+	padding-top: 2em;
+}
+.side-image .side-image-content.contact-address {
+	p {
+		margin-bottom: 0.5em;
+	}
+}

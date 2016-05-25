@@ -7,14 +7,14 @@
     %title= current_page.data.title || "The Middleman"
     %link{:href => "//fonts.googleapis.com/css?family=Questrial", :rel => "stylesheet", :type => "text/css"}
     %link{:href => "//fonts.googleapis.com/css?family=Sanchez:400italic,400", :rel => "stylesheet", :type => "text/css"}
+    %link{:href => "//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css", :rel => "stylesheet", :type => "text/css"}
     = stylesheet_link_tag "application"
+
 
   %body{class: page_classes}
     = partial '/layouts/_nav'
-    .container.type-system-traditional
+    .container.type-system-geometric
       = yield
-    = javascript_include_tag "https://code.jquery.com/jquery-2.1.1.min.js"
-    = javascript_include_tag "application"
 
     %footer.footer-2{:role => "contentinfo"}
       .container
@@ -46,3 +46,79 @@
             %li
               %a{:href => "javascript:void(0)"}
                 %img{:alt => "Instagram", :src => "http://f.cl.ly/items/2h0R3U1z3E023v101h0M/Untitled-1.png"}
+    %script{:src => "https://maps.googleapis.com/maps/api/js"}
+
+    = javascript_include_tag "//code.jquery.com/jquery-2.1.1.min.js"
+    = javascript_include_tag "//code.jquery.com/jquery-migrate-1.2.1.min.js"
+    = javascript_include_tag "//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"
+    = javascript_include_tag "application"
+    :javascript
+      $(document).ready(function(){
+        $('.slider1').slick({
+          lazyLoad: 'ondemand',
+          dots: true,
+          infinite: true,
+          speed: 300,
+          slidesToShow: 1,
+          adaptiveHeight: true
+        });
+        $('.slider2').slick({
+          lazyLoad: 'ondemand',
+          dots: true,
+          infinite: true,
+          speed: 300,
+          slidesToShow: 1,
+          adaptiveHeight: true
+        });
+      });
+      var bittersMap = (function () {
+        var myLatlng = new google.maps.LatLng(33.984941, -118.470513),
+            mapCenter = new google.maps.LatLng(33.984941, -118.470513),
+            mapCanvas = document.getElementById('map_canvas'),
+            mapOptions = {
+              center: mapCenter,
+              zoom: 13,
+              scrollwheel: false,
+              draggable: true,
+              disableDefaultUI: true,
+              mapTypeId: google.maps.MapTypeId.ROADMAP
+            },
+            map = new google.maps.Map(mapCanvas, mapOptions),
+            contentString =
+              ''+
+              ''+
+              ''+
+              'thoughtbot'+
+              '<div id="bodyContent"'+
+              'Sveavägen 98'+
+              ''+
+              '',
+            infowindow = new google.maps.InfoWindow({
+              content: contentString,
+              maxWidth: 300
+            }),
+            marker = new google.maps.Marker({
+              position: myLatlng,
+              map: map,
+              title: 'thoughtbot (Sweden)'
+            });
+
+        return {
+          init: function () {
+            map.set('styles', [{
+              featureType: 'landscape',
+              elementType: 'geometry',
+              stylers: [
+                { hue: '#ffff00' },
+                { saturation: 30 },
+                { lightness: 10}
+              ]}
+            ]);
+
+            google.maps.event.addListener(marker, 'click', function () {
+              infowindow.open(map,marker);
+            });
+          }
+        };
+      }());
+      bittersMap.init();

@@ -3,10 +3,6 @@
   .image-gradient-dynamic {
     display: block;
     margin-bottom: 2em;
-
-    > img {
-      height: 400px;
-    }
   }
 }
 
@@ -17,10 +13,6 @@
     display: block;
     @include span-columns(3);
     margin-bottom: 2em;
-
-    > img {
-      height: 230px;
-    }
   }
   .row {
     @include row();

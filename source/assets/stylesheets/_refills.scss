@@ -1,10 +1,6 @@
 // Transition
 .transition {
-  -webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  -ms-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
+  @include transition(all 0.3s ease-in-out);
 }
 
 // Navigation
@@ -491,74 +487,6 @@ article.type-system-geometric {
   }
 }
 
-// Side Image
-.side-image {  
-  $base-line-height: 1.5em !default;
-  $action-color: #477DCA !default;
-  $dark-gray: #333 !default;
-  $large-screen: em(860) !default;
-  $base-font-color: $dark-gray !default;
-  $side-image-background-top: #B5EBEB;
-  $side-image-background-bottom: #5DAC5D;
-  $side-image-content-background: #F9F9F9;
-  $side-image-border: 1px solid darken(transparentize($side-image-background-bottom, 0.8), 30%);
-
-  background: $side-image-content-background;
-
-  @include media($large-screen) {
-    @include row(table);
-  }
-
-  .images-wrapper {
-    @include background(url('https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/mountains.png'), linear-gradient($side-image-background-top, $side-image-background-bottom), no-repeat $side-image-background-top scroll);
-    background-color: $side-image-background-top;
-    background-size: cover;
-    border-bottom: $side-image-border;
-    display: block;
-    min-height: 12em;
-    padding: 3em;
-
-    @include media($large-screen) {
-      @include span-columns(4);
-      background-position: bottom;
-      background-size: cover;
-      border-right: $side-image-border;
-    }
-  }
-
-  .side-image-content {
-    @include span-columns(12);
-    padding: 1em 1em 4em 1em;
-
-    @include media($large-screen) {
-      @include span-columns(8);
-      padding: 4em 4em 8em 4em;
-    }
-
-    h1 {
-      margin-bottom: 0.9em;
-    }
-
-    h4 {
-      background: #BBB;
-      color: white;
-      display: inline-block;
-      font-size: 0.75em;
-      margin-bottom: 1.3em;
-      padding: 3px 8px;
-      text-transform: uppercase;
-    }
-
-    p {
-      color: $base-font-color;
-      line-height: $base-line-height;
-      margin-bottom: 3em;
-    }
-  }
-
-  @include reset-display();
-}
-
 // Dynamic Height Image
 .image-gradient-dynamic {
   $image-gradient-color-top: red; 
@@ -576,7 +504,7 @@ article.type-system-geometric {
   position: relative;
   width: 100%;
 
-  img {
+  > img {
    height: auto;
    left: 0; 
    position: relative;
@@ -633,18 +561,9 @@ article.type-system-geometric {
   }
 
   .overlay {
-    @include linear-gradient($vertical-angle, transparentize($image-gradient-color-top, $transparency-top), 
-      transparentize($image-gradient-color-bottom, $transparency-bottom));
+    background: rgba(black, 0.4);
     display: block;
     @include position(absolute, 0px 0px 0px 0px);
-
-    &:after {
-      @include linear-gradient($horizontal-angle, transparentize($image-gradient-color-left, $transparency-left), 
-        transparentize($image-gradient-color-right, $transparency-right));
-      @include position(absolute, 0px 0px 0px 0px);
-      content: '';
-      display: block;
-    }
   }
 }
 
@@ -879,4 +798,90 @@ a.button-secondary {
       background-color: $card-background;
     }
   }
+}
+
+// Side Image
+.side-image {
+  $base-line-height: 1.5em !default;
+  $action-color: #477DCA !default;
+  $dark-gray: #333 !default;
+  $large-screen: 53.75em !default;
+  $base-font-color: $dark-gray !default;
+  $side-image-background-top: #B5EBEB;
+  $side-image-background-bottom: #5DAC5D;
+  $side-image-content-background: #F9F9F9;
+  $side-image-border: 1px solid darken(transparentize($side-image-background-bottom, 0.8), 30%);
+
+  background: $side-image-content-background;
+
+  @include media($large-screen) {
+    @include row(table);
+  }
+
+  .images-wrapper {
+
+    @include media($large-screen) {
+      @include span-columns(8);
+    }
+  }
+
+  .side-image-content {
+    @include span-columns(12);
+    padding: 2em;
+    vertical-align: top;
+
+    @include media($large-screen) {
+      @include span-columns(4);
+    }
+
+    h1 {
+      margin-bottom: 0.9em;
+    }
+
+    h4 {
+      background: #BBB;
+      color: white;
+      display: inline-block;
+      font-size: 0.75em;
+      margin-bottom: 1.3em;
+      padding: 3px 8px;
+      text-transform: uppercase;
+    }
+
+    p {
+      color: $base-font-color;
+      line-height: $base-line-height;
+      margin-bottom: 3em;
+    }
+  }
+
+  @include reset-display();
+}
+
+
+// Map
+#map_canvas {
+  height: 400px;
+  width: 100%;
+}
+
+#map_canvas img {
+  max-width: none; 
+// to prevent UI control bug
+}
+
+#map_canvas .content {
+  padding: 2em 0.5em 1em 0.5em;
+}
+
+#map_canvas .firstHeading {
+  font-size: 1em;
+  font-weight: bold;
+  line-height: 1em;
+  margin: 0;
+}
+
+#map_canvas #bodyContent p {
+  font-size: 1em;
+  margin: 0;
 }
